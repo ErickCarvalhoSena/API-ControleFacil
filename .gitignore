@@ -1,0 +1,21 @@
+#build
+bin/
+obj/
+
+#Variaveis do ambiente
+.env
+*.env
+
+#Configurações Locais
+appsettings.Development.json
+
+#VSCode
+.vscode/
+
+#Visual Studio
+.vs/
+*.user
+
+**/launchSettings.json**/appsettings.json
+**/appsettings*.json
+**/Properties/
