@@ -16,6 +16,4 @@ appsettings.Development.json
 .vs/
 *.user
 
-**/launchSettings.json**/appsettings.json
-**/appsettings*.json
-**/Properties/
+**/launchSettings.json

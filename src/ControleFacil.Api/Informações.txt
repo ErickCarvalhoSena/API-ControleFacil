@@ -6,3 +6,17 @@ Instalar o dotnet-ef
 
    Executar migrations
    dotnet ef database update
+
+Passo a passo de como criar uma nova entidade:
+   1° Criar o modelo
+   2° Criar o mapeamento
+   3° Adicionar mapeamento no applicationContext
+   4° Criar a migration da nova entidade
+   5°Executar migrations
+
+   Criando o CRUD:
+
+      1° Modelo / entidade
+      2° Repositório
+      3° Serviço
+      4° Controller
