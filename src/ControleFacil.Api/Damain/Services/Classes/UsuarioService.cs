@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ControleFacil.Api.Contract.Usuario;
+using ControleFacil.Api.Damain.Repository.Interfaces;
+using ControleFacil.Api.Damain.Services.Interfaces;
+
+namespace ControleFacil.Api.Damain.Services.Classes
+{
+    public class UsuarioService : IUsuarioService
+    {
+        private readonly IUsuarioRepository _usuarioRepository;
+
+        public UsuarioService(IUsuarioRepository usuarioRepository)
+        {
+            _usuarioRepository = usuarioRepository;
+        }
+        public Task<UsuarioResponseContract> Adicionar(UsuarioRequestContract entidade, long idUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UsuarioResponseContract> Atualizar(long id, UsuarioRequestContract entidade, long idUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UsuarioLoginResponseContract> Autenticar(UsuarioLoginRequestContract usuarioLoginRequest)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Inativar(long id, long idUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<UsuarioResponseContract>> Obter(long idUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UsuarioResponseContract> Obter(long id, long idUsuario)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
