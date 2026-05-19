@@ -1,4 +1,6 @@
 using System.Text;
+using AutoMapper;
+using ControleFacil.Api.AutoMapper;
 using ControleFacil.Api.Damain.Repository.Classes;
 using ControleFacil.Api.Damain.Repository.Interfaces;
 using ControleFacil.Api.Data;
@@ -26,9 +28,17 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     
     builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
+     var config = new MapperConfiguration(cfg =>
+     {
+         cfg.AddProfile<UsuarioProfile>();
+     });
+
+     IMapper mapper = config.CreateMapper();
+
     builder.Services
     .AddSingleton(builder.Configuration)
     .AddSingleton(builder.Environment)
+    .AddSingleton(mapper)
     .AddScoped<IUsuarioRepository, UsuarioRepository>();
 }
 
