@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ControleFacil.Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20260522230313_CriarEntidadeNaturezaDeLancamento")]
+    [Migration("20260522233009_CriarEntidadeNaturezaDeLancamento")]
     partial class CriarEntidadeNaturezaDeLancamento
     {
         /// <inheritdoc />
@@ -24,6 +24,37 @@ namespace ControleFacil.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("ControleFacil.Api.Damain.Models.NaturezaDeLancamento", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<long>("IdUsuario")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("VARCHAR");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("naturezadelancamento", (string)null);
+                });
 
             modelBuilder.Entity("ControleFacil.Api.Damain.Models.Usuario", b =>
                 {
@@ -50,6 +81,17 @@ namespace ControleFacil.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("usuario", (string)null);
+                });
+
+            modelBuilder.Entity("ControleFacil.Api.Damain.Models.NaturezaDeLancamento", b =>
+                {
+                    b.HasOne("ControleFacil.Api.Damain.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }
