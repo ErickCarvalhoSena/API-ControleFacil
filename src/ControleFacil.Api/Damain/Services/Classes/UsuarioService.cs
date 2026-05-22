@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +19,13 @@ namespace ControleFacil.Api.Damain.Services.Classes
 
         private readonly IMapper _mapper;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
+        private readonly TokenService _tokenService;
+
+        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper, TokenService tokenService)
         {
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
         public async Task<UsuarioResponseContract> Adicionar(UsuarioRequestContract entidade, long idUsuario)
         {
@@ -51,9 +55,23 @@ namespace ControleFacil.Api.Damain.Services.Classes
 
         }
 
-        public Task<UsuarioLoginResponseContract> Autenticar(UsuarioLoginRequestContract usuarioLoginRequest)
+        public async Task<UsuarioLoginResponseContract> Autenticar(UsuarioLoginRequestContract usuarioLoginRequest)
         {
-            throw new NotImplementedException();
+            UsuarioResponseContract usuario = await Obter(usuarioLoginRequest.Email);
+
+            var hashSenha = GerarHashSenha(usuarioLoginRequest.Senha);
+
+            if(usuario is null || usuario.Senha != hashSenha)
+            {
+                throw new AuthenticationException("Usuario ou senha invalido!");
+            }
+
+            return new UsuarioLoginResponseContract {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Token = _tokenService.GerarToken(_mapper.Map<Usuario>(usuario))
+
+            };
         }
 
         public async Task Inativar(long id, long idUsuario)

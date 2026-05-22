@@ -42,11 +42,12 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddSingleton(builder.Configuration)
     .AddSingleton(builder.Environment)
     .AddSingleton(mapper)
+    .AddScoped<TokenService>()
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
     .AddScoped<IUsuarioService, UsuarioService>();
 }
 
-// Configura o serviços da API.
+// Configurar o serviços da API.
 static void ConfigurarServices(WebApplicationBuilder builder)
 {
     builder.Services
