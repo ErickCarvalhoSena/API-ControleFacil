@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ControleFacil.Api.Damain.Services.Classes;
 using ControleFacil.Api.Damain.Services.Interfaces;
+using ControleFacil.Api.Damain.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,7 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
      var config = new MapperConfiguration(cfg =>
      {
          cfg.AddProfile<UsuarioProfile>();
+         cfg.AddProfile<NaturezaDeLancamentoProfile>();
      });
 
      IMapper mapper = config.CreateMapper();
@@ -44,7 +46,8 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddSingleton(mapper)
     .AddScoped<TokenService>()
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
-    .AddScoped<IUsuarioService, UsuarioService>();
+    .AddScoped<IUsuarioService, UsuarioService>()
+    .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>();
 }
 
 // Configurar o serviços da API.
