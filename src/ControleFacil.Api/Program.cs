@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using ControleFacil.Api.Damain.Services.Classes;
 using ControleFacil.Api.Damain.Services.Interfaces;
 using ControleFacil.Api.Damain.Models;
+using ControleFacil.Api.Contract.NaturezaDeLancamento;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +48,8 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddScoped<TokenService>()
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
     .AddScoped<IUsuarioService, UsuarioService>()
-    .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>();
+    .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
+    .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>();
 }
 
 // Configurar o serviços da API.
