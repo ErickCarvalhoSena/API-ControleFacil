@@ -23,4 +23,4 @@ Passo a passo de como criar uma nova entidade:
       5° Controller
 
 
-      dotnet ef migrations add CriarEntidadeNaturezaDeLancamento
+      dotnet ef migrations add CriarEntidadeApagar
