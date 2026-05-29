@@ -14,6 +14,7 @@ using ControleFacil.Api.Damain.Services.Interfaces;
 using ControleFacil.Api.Damain.Models;
 using ControleFacil.Api.Contract.NaturezaDeLancamento;
 using ControleFacil.Api.Contract.Apagar;
+using ControleFacil.Api.Contract.Areceber;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,7 +55,9 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
     .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>()
     .AddScoped<IApagarRepository, ApagarRepository>()
-    .AddScoped<IService<ApagarRequestContract, ApagarResponseContract, long>, ApagarService>();
+    .AddScoped<IService<ApagarRequestContract, ApagarResponseContract, long>, ApagarService>()
+    .AddScoped<IAreceberRepository, AreceberRepository>()
+    .AddScoped<IService<AreceberRequestContract, AreceberResponseContract, long>, AreceberService>();
 }
 
 // Configurar o serviços da API.

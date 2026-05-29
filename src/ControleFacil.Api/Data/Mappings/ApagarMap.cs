@@ -48,8 +48,8 @@ namespace ControleFacil.Api.Data.Mappings
             .IsRequired();
 
             builder.Property(p => p.DataReferencia)
-            .HasColumnType("timestamp")
-            .IsRequired();
+            .HasColumnType("timestamp");
+           
 
             builder.Property(p => p.DataPagamento)
             .HasColumnType("timestamp")
