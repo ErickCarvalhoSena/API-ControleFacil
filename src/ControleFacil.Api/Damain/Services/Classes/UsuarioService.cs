@@ -10,6 +10,7 @@ using ControleFacil.Api.Contract.Usuario;
 using ControleFacil.Api.Damain.Models;
 using ControleFacil.Api.Damain.Repository.Interfaces;
 using ControleFacil.Api.Damain.Services.Interfaces;
+using ControleFacil.Api.Exceptions;
 
 namespace ControleFacil.Api.Damain.Services.Classes
 {
@@ -43,7 +44,7 @@ namespace ControleFacil.Api.Damain.Services.Classes
 
         public async Task<UsuarioResponseContract> Atualizar(long id, UsuarioRequestContract entidade, long idUsuario)
         {
-           _ = await Obter(id) ?? throw new Exception("Usuario não encontrado para atualizar");
+           _ = await Obter(id) ?? throw new NotFoundException("Usuario não encontrado para atualizar");
 
            var usuario = _mapper.Map<Usuario>(entidade);
            usuario.Id = id;
@@ -76,7 +77,7 @@ namespace ControleFacil.Api.Damain.Services.Classes
 
         public async Task Inativar(long id, long idUsuario)
         {
-            var usuario = await _usuarioRepository.Obter(id) ?? throw new Exception("Usuario não encontrado para invativar");
+            var usuario = await _usuarioRepository.Obter(id) ?? throw new NotFoundException("Usuario não encontrado para invativar");
 
             await _usuarioRepository.Deletar(_mapper.Map<Usuario>(usuario));
         }
